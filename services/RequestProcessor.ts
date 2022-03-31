@@ -15,14 +15,13 @@ export class RequestProcessor{
                 }
 
             const response:Response = await fetch(url, args);
-            const jsonData:T|string = await response.json();
-
-            if(response.status!==200 && typeof jsonData === "string"){
+            if(response.status!==200){
                 return {
                     status:response.status,
-                    error:jsonData
+                    error:await response.text()
                 }
             }
+            const jsonData:T|string = await response.json();
             return {
                 status:response.status,
                 ...(jsonData as T)

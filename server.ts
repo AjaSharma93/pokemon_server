@@ -18,12 +18,12 @@ app.use(morgan("combined", { stream: new LoggerStream() }));
 const SERVER_PORT = process.env.SERVER_PORT;
 
 app.get('/pokemon/:pokemon_name', async (req: express.Request, res: express.Response) => {
-    let pokemonName = req.params.pokemon_name;
+    const pokemonName = req.params.pokemon_name;
     let failureMessage: PokemonResponseFailure;
     if (pokemonName.length === 0) {
         failureMessage = {
             error: "pokemon_name_invalid",
-            description: messages["pokemon_name_invalid"]
+            description: messages.pokemon_name_invalid
         }
         res.status(400);
         return res.send(failureMessage);

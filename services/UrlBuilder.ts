@@ -4,9 +4,10 @@ export class UrlBuilder {
     private pathList = new Map<string, string>();
     private _serverUrl: string;
 
-    constructor(serverUrl){
+    constructor(serverUrl:string){
         this._serverUrl = serverUrl;
         this.pathList.set('FETCH_POKEMON', '/api/v2/pokemon');
+        this.pathList.set('SHAKESPEARE_JSON', '/translate/shakespeare.json');
     }
 
     getApiUrl(pathName: string, params: any={}) {
