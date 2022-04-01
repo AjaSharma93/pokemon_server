@@ -34,7 +34,6 @@ app.get('/pokemon/:pokemon_name', async (req: express.Request, res: express.Resp
     const result: PokemonResponseSuccess | FetchError = await pFetcher.fetchPokemonDetails(pokemonName);
     res.status(result.status);
     res.send(result)
-
 })
 
 export const init = function appInit() {
