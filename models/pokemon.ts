@@ -101,7 +101,7 @@ export class PokemonFetcher {
                 }
             });
 
-            if (this.isPokemonCharcteristicsResponseInvalid(pokemonSpeciesData as FetchError)) {
+            if (this.isPokemonCharacteristicsResponseInvalid(pokemonSpeciesData as FetchError)) {
                 logger.error(`Error fetching pokemon charcteristics details, ${JSON.stringify(pokemonSpeciesData)}`);
                 return (pokemonSpeciesData as FetchError);
             }
@@ -125,7 +125,10 @@ export class PokemonFetcher {
 
                 if (this.isConvertedResponseInvalid(convertedData as FetchError)) {
                     logger.error(`Error fetching pokemon details, ${JSON.stringify(convertedData)}`);
-                    return (convertedData as FetchError);
+                    return ({
+                        status:(convertedData as FetchError).status,
+                        error:JSON.parse((convertedData as FetchError).error)?.error?.message ?? "Error in translation"
+                    } );
                 }
 
                 this._pokemon.description = (convertedData as ShakespeareResponse).contents?.translated ?? null;
@@ -150,12 +153,11 @@ export class PokemonFetcher {
         return ((pokemonData).error && (pokemonData).error !== null)
     }
 
-    isPokemonCharcteristicsResponseInvalid(pokemonSpeciesData: FetchError) {
+    isPokemonCharacteristicsResponseInvalid(pokemonSpeciesData: FetchError) {
         return ((pokemonSpeciesData).error && (pokemonSpeciesData).error !== null)
     }
 
-    // Change later
     isConvertedResponseInvalid(convertedData:FetchError){
-        return false;
+        return ((convertedData.status!==200) || (convertedData.error) );
     }
 }

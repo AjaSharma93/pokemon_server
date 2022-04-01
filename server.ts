@@ -20,6 +20,7 @@ const SERVER_PORT = process.env.SERVER_PORT;
 app.get('/pokemon/:pokemon_name', async (req: express.Request, res: express.Response) => {
     const pokemonName = req.params.pokemon_name;
     let failureMessage: PokemonResponseFailure;
+    res.setHeader("Access-Control-Allow-Origin", "*")
     if (pokemonName.length === 0) {
         failureMessage = {
             error: "pokemon_name_invalid",
