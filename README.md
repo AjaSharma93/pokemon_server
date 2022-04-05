@@ -17,7 +17,8 @@ Sample response body:
 
 To run tests:
 Install NodeJS from the link [NodeJS 17.7](https://nodejs.org/download/release/v17.7.2/)
-Install typescript using the following command:
+
+Then install typescript using the following command:
 ```
 npm install -g typescript
 ```
@@ -28,6 +29,8 @@ npm run test
 ```
 
 For deployment to docker, use the following command:
-`docker-compose -f .\dockercompose.prod.yml up -d --build`
+```
+docker-compose -f .\dockercompose.prod.yml up -d --build
+```
 
 The service will be deployed on the external port **8085**.
