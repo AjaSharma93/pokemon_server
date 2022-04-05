@@ -1,12 +1,11 @@
-import express from "express";
-import { UrlBuilder } from './services/UrlBuilder';
 import dotenv from 'dotenv';
-import { logger, LoggerStream } from "./config/winston";
+import express from "express";
 import morgan from "morgan";
 import path from 'path';
-import { FetchError } from "./services/RequestProcessor";
 import messages from "./config/messages";
+import { LoggerStream } from "./config/winston";
 import { PokemonFetcher, PokemonResponseFailure, PokemonResponseSuccess } from "./models/pokemon";
+import { FetchError } from "./services/RequestProcessor";
 
 // Load up env variables
 dotenv.config({ path: path.join(__dirname, "..", '.env') });
@@ -14,7 +13,7 @@ dotenv.config({ path: path.join(__dirname, "..", '.env') });
 const app: any = express();
 app.use(morgan("combined", { stream: new LoggerStream() }));
 
-// Setup auth token and server port.
+// Setup server port.
 const SERVER_PORT = process.env.SERVER_PORT;
 
 app.get('/pokemon/:pokemon_name', async (req: express.Request, res: express.Response) => {
