@@ -62,7 +62,7 @@ export type PokemonResponseFailure = {
 }
 
 
-/* Class definition to store the account details of a particular account */
+/* Class definition to store the pokemon details of a particular pokemon */
 export class PokemonFetcher {
     private _pokemon: Pokemon;
     get pokemon() { return this._pokemon }
